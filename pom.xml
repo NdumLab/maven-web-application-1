@@ -78,17 +78,17 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://172.31.87.166:8807/repository/tesla-releases/</url>
+	      <url>http://34.203.38.7:8081/repository/toyota-releases/</url>
 	    </repository>
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository</name>
-	      <url>http://172.31.87.166:8807/repository/tesla-snapshot/</url>
+	      <url>http://34.203.38.7:8081/repository/toyota-snapshot/</url>
 	    </snapshotRepository>
 	</distributionManagement>
 
 	<build>
-		<finalName>tesla-web-application</finalName>
+		<finalName>toyota-web-application</finalName>
 		
 		<plugins>
 			<plugin>
