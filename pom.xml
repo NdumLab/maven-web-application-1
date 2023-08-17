@@ -88,7 +88,7 @@
 	</distributionManagement>
 
 	<build>
-		<finalName>toyota-web-application</finalName>
+		<finalName>One-on-One-Tomchriz-Kurogwam</finalName>
 		
 		<plugins>
 			<plugin>
