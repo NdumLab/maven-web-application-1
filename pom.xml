@@ -88,7 +88,7 @@
 	</distributionManagement>
 
 	<build>
-		<finalName>OneONOne Kurogwam</finalName>
+		<finalName>OneONOne-Kurogwam</finalName>
 		
 		<plugins>
 			<plugin>
