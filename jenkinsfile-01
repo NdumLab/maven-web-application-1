@@ -1,1 +1,46 @@
+node {
+    def mavenHome = tool name: 'maven3.9'
+    try {
+        stage('1.GetCode') {
+            git "https://github.com/NdumLab/maven-web-application-1.git"
+        }
+        stage('2.Test & Build') {
+            sh "${mavenHome}/bin/mvn clean package"
+        }
+        stage('3.Code Quality Analysis') {
+            sh "${mavenHome}/bin/mvn sonar:sonar"
+        }
+        stage('4.Push Artifacts to Nexus') {
+            sh "${mavenHome}/bin/mvn deploy"
+        }
+        stage('5.Build Docker Image') {
+            sh 'docker build -t my-app:latest .'
+        }
+        stage('6.Push Docker Image') {
+            sh 'docker push my-app:latest'
+        }
+        stage('7.Deploy to Kubernetes UAT') {
+            sh "kubectl apply -f k8s-deployment.yaml --namespace=uat"
+        }
+        stage('8.Approval') {
+            sh "echo 'Application ready for review'"
+            timeout(time: 5, unit: 'HOURS') {
+                input message: 'Application ready for review please review and approve'
+            }
+        }
+        stage('9.Deploy to Kubernetes Production') {
+            sh "kubectl apply -f k8s-deployment.yaml --namespace=production"
+        }
+    } catch (Exception e) {
+        println "Caught exception: ${e.getMessage()}"
+        emailext(
+            to: 'dev-team@example.com',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            body: """<p>Something went wrong with ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<a href='${env.BUILD_URL}'>Open</a>)</p>""",
+            mimeType: 'text/html'
+        )
+        currentBuild.result = 'FAILURE'
+        throw e
+    }
+}
 
