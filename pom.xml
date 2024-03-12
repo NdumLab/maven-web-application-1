@@ -78,7 +78,7 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://171.31.58.153:8081/repository/tomchriz-RELEASES/</url>
+	      <url>http://171.31.58.150:8081/repository/tomchriz-RELEASES/</url>
 	    </repository>
 	    <snapshotRepository>
 	      <id>nexus</id>
